@@ -1,9 +1,11 @@
 import threading
+import time
 
 def minha_funcao():
     # código da thread
     print("Iniciando a thread...")
     # faça algo aqui...
+    time.sleep(10)  # faz a thread esperar por 10 segundos
     print("Finalizando a thread...")
 
 # cria uma nova thread

@@ -38,7 +38,7 @@ As aplicações são desenvolvidas por terceiros, incluindo empresas, desenvolve
 ## Introdução as Threads
 Uma thread é a menor unidade de processamento que pode ser agendada pelo sistema operacional para executar uma tarefa em um programa. Em outras palavras, uma thread é uma sequência de instruções de código que pode ser executada simultaneamente com outras sequências de instruções de código em um mesmo programa. <br>
 Cada thread possui um registro de pilha de execução próprio, que contém informações sobre as instruções que devem ser executadas e o estado atual do processo. As threads são comumente usadas em programas que precisam executar tarefas em paralelo, ou seja, que precisam executar várias tarefas simultaneamente para aumentar a eficiência do programa ou melhorar a experiência do usuário. <br>
-Segue em anexo um código realizado em Python mostrando como é uma thread em execução<br>
+Segue em anexo um código realizado em Python mostrando como é uma thread em execução 
 ```
 import threading
 import time
@@ -62,6 +62,10 @@ thread.join()
 # o programa agora pode continuar com outras tarefas
 print("A thread foi finalizada.") 
 ```
+<br>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/96505484/231562564-fb429be1-5430-45d3-af25-24663a677b54.png" width="700px" />
+</div> 
 
 
 

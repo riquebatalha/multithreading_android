@@ -61,11 +61,11 @@ thread.join()
 # o programa agora pode continuar com outras tarefas
 print("A thread foi finalizada.") 
 ```
-<br>
+Para analisarmos melhor o processo dessa thread, podemos usar um utilitário "htop" no linux, para exibir as informações sobre os processos em execução do sistema de uma forma mais interativa e visual 
 <div align="center">
 <img src="https://user-images.githubusercontent.com/96505484/231562564-fb429be1-5430-45d3-af25-24663a677b54.png" width="700px" />
-</div> 
-
+<p align="center"> Figura 2. htop no Linux </p>  
+</div> <br>
 
 
 

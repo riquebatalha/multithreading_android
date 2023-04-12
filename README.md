@@ -17,29 +17,30 @@ Segundo o [Android Developers 2012], Android é mais do que um sistema operacion
 
 <p align="center"> Figura 1. Arquitetura do Android </p>  
 
-> ## Kernel Linux 
+> ### Kernel Linux 
 
 O kernel usado é o Linux na sua versão 4.14, seguida pela 4.19 e 5.4. A versão mais recente do kernel Linux disponível é a 5.12, mas ainda não foi amplamente adotada no Android. [Android Developers 2023] <br> 
 
-> ## Android Runtime
+> ### Android Runtime
 
 O Android Runtime (ART) é o ambiente de execução de aplicativos usado pelo sistema operacional Android. Ele é responsável por executar o código dos aplicativos em um dispositivo Android <br>
 
-> ## Bibliotecas
+> ### Bibliotecas
 As bibliotecas são organizadas em diferentes camadas de acordo com sua finalidade e nível de abstração. As camadas de bibliotecas mais baixas são compostas de bibliotecas nativas, que são escritas em linguagens de programação de baixo nível, como C e C++, e são usadas para acessar recursos do sistema operacional e do hardware, como o sistema de arquivos, a câmera ou o GPS. As bibliotecas de nível mais alto são compostas de código Java, que são usadas para fornecer funcionalidades de alto nível, como a interface do usuário, a lógica de negócios e a comunicação com a rede. <br>
 
-> ## Framework de Aplicação
+> ### Framework de Aplicação
 O Framework de Aplicação é projetado para facilitar o desenvolvimento de aplicativos Android, fornecendo uma estrutura de desenvolvimento consistente e reutilizável. Ele fornece uma variedade de componentes que os desenvolvedores podem usar para criar aplicativos, incluindo Activity, Service, Broadcast Receiver e Content Provider. <br>
 
-> ## Aplicações 
+> ### Aplicações 
 As aplicações são desenvolvidas por terceiros, incluindo empresas, desenvolvedores independentes e organizações governamentais, e são distribuídas através da Google Play Store ou outras lojas de aplicativos. As aplicações podem ser gratuitas ou pagas, e muitas delas oferecem recursos adicionais através de compras dentro do aplicativo.
 
 
 ## Introdução as Threads
+> ### Single Thread
 Uma thread é a menor unidade de processamento que pode ser agendada pelo sistema operacional para executar uma tarefa em um programa. Em outras palavras, uma thread é uma sequência de instruções de código que pode ser executada simultaneamente com outras sequências de instruções de código em um mesmo programa. <br>
 Cada thread possui um registro de pilha de execução próprio, que contém informações sobre as instruções que devem ser executadas e o estado atual do processo. As threads são comumente usadas em programas que precisam executar tarefas em paralelo, ou seja, que precisam executar várias tarefas simultaneamente para aumentar a eficiência do programa ou melhorar a experiência do usuário. <br>
 Segue em anexo um código realizado em Python mostrando como é uma thread em execução 
-```
+```python
 import threading
 import time
 

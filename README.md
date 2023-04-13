@@ -38,7 +38,9 @@ As aplicações são desenvolvidas por terceiros, incluindo empresas, desenvolve
 ## Introdução as Threads
 > ### Single Thread
 Uma thread é a menor unidade de processamento que pode ser agendada pelo sistema operacional para executar uma tarefa em um programa. Em outras palavras, uma thread é uma sequência de instruções de código que pode ser executada simultaneamente com outras sequências de instruções de código em um mesmo programa. <br>
+
 Cada thread possui um registro de pilha de execução próprio, que contém informações sobre as instruções que devem ser executadas e o estado atual do processo. As threads são comumente usadas em programas que precisam executar tarefas em paralelo, ou seja, que precisam executar várias tarefas simultaneamente para aumentar a eficiência do programa ou melhorar a experiência do usuário. <br>
+
 Segue em anexo um código realizado em Python mostrando como é uma thread em execução 
 ```python
 import threading
@@ -67,6 +69,11 @@ Para analisarmos melhor o processo dessa thread, podemos usar o utilitário "hto
 <img src="https://user-images.githubusercontent.com/96505484/231562564-fb429be1-5430-45d3-af25-24663a677b54.png" width="700px" />
 <p align="center"> Figura 2. htop no Linux </p>  
 </div> <br>
+
+> ### Multithread
+Multithreading refere-se à capacidade de executar múltiplos fluxos de execução ou tarefas simultaneamente em um único processo. Cada thread é uma sequência independente de instruções que podem ser executadas em paralelo com outras threads no mesmo processo. <br>
+
+Quando uma aplicação é executada em um único thread, ela executa as tarefas em uma sequência linear, o que pode levar a atrasos e tempos de resposta lentos. Por outro lado, se a aplicação utilizar vários threads, ela pode executar várias tarefas simultaneamente, o que pode melhorar significativamente o desempenho e a capacidade de resposta da aplicação.[BURNS 2020]
 
 
 

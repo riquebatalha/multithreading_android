@@ -98,11 +98,11 @@ if __name__ == '__main__':
 
     print('Contagem finalizada!')
 ```
+Neste caso, podemos perceber como o multithread funciona, sendo executado mais de uma thread ao mesmo tempo.
 <div align="center">
 <img src="https://user-images.githubusercontent.com/96505484/231831208-375ee1ba-f361-4421-b9c9-fc3ae457b0db.png" width="700px" />
 <p align="center"> Figura 3. htop com multithread </p>  
 </div> <br>
-Neste caso, podemos perceber como o multithread funciona, sendo executadas mais de uma thread ao mesmo tempo.
 
 
 

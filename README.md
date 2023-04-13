@@ -74,6 +74,12 @@ Para analisarmos melhor o processo dessa thread, podemos usar o utilitário "hto
 Multithreading refere-se à capacidade de executar múltiplos fluxos de execução ou tarefas simultaneamente em um único processo. Cada thread é uma sequência independente de instruções que podem ser executadas em paralelo com outras threads no mesmo processo. <br>
 
 Quando uma aplicação é executada em um único thread, ela executa as tarefas em uma sequência linear, o que pode levar a atrasos e tempos de resposta lentos. Por outro lado, se a aplicação utilizar vários threads, ela pode executar várias tarefas simultaneamente, o que pode melhorar significativamente o desempenho e a capacidade de resposta da aplicação.[BURNS 2020]
+<div align="center">
+<img src="https://user-images.githubusercontent.com/96505484/231831208-375ee1ba-f361-4421-b9c9-fc3ae457b0db.png" width="700px" />
+<p align="center"> Figura 3. htop com multithread </p>  
+</div> <br>
+
+
 
 
 

@@ -74,10 +74,35 @@ Para analisarmos melhor o processo dessa thread, podemos usar o utilitário "hto
 Multithreading refere-se à capacidade de executar múltiplos fluxos de execução ou tarefas simultaneamente em um único processo. Cada thread é uma sequência independente de instruções que podem ser executadas em paralelo com outras threads no mesmo processo. <br>
 
 Quando uma aplicação é executada em um único thread, ela executa as tarefas em uma sequência linear, o que pode levar a atrasos e tempos de resposta lentos. Por outro lado, se a aplicação utilizar vários threads, ela pode executar várias tarefas simultaneamente, o que pode melhorar significativamente o desempenho e a capacidade de resposta da aplicação.[BURNS 2020]
+```python 
+import threading
+import time
+
+def contar_ate_n(n):
+    for i in range(1, n+1):
+        print(i)
+        time.sleep(0.5)
+
+if __name__ == '__main__':
+    n1 = int(input('Digite um número inteiro para a primeira thread: '))
+    n2 = int(input('Digite um número inteiro para a segunda thread: '))
+
+    thread1 = threading.Thread(target=contar_ate_n, args=(n1,))
+    thread2 = threading.Thread(target=contar_ate_n, args=(n2,))
+
+    thread1.start()
+    thread2.start()
+
+    thread1.join()
+    thread2.join()
+
+    print('Contagem finalizada!')
+```
 <div align="center">
 <img src="https://user-images.githubusercontent.com/96505484/231831208-375ee1ba-f361-4421-b9c9-fc3ae457b0db.png" width="700px" />
 <p align="center"> Figura 3. htop com multithread </p>  
 </div> <br>
+Neste caso, podemos perceber como o multithread funciona, sendo executadas mais de uma thread ao mesmo tempo.
 
 
 

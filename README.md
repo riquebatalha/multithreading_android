@@ -104,6 +104,10 @@ Neste caso, podemos perceber como o multithread funciona, sendo executado mais d
 <p align="center"> Figura 3. htop com multithread </p>  
 </div> <br>
 
+> ### Multithread em Android
+A partir de uma perspectiva de aplicação, existem três tipos de threads: threads de UI, threads de Binder e threads de background, embora todas as threads de aplicação sejam baseadas nos pthreads nativos do Linux e tenham uma representação de Thread em Java, a plataforma atribui propriedades especiais a elas que as distinguem umas das outras.[Göransson 2014]
+
+
 
 
 

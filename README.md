@@ -242,6 +242,15 @@ You have to wait for the threads to finish.
   return 0;
 }
 ```
+## Referências
+Android Developers (2012). The developer’s guide. Disponível em: <http://developer.android.com/guide/index.html>.<br>
+
+Brahler, S. (2010). Analysis of the android architecture.<br>
+
+Göransson, Anders. Efficient Android Threading.<br>
+
+https://book-of-gehn.github.io/articles/2021/08/22/Rooting-Android-with-a-Dirty-COW.html<br>
+
 
 
 

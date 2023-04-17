@@ -43,26 +43,19 @@ Cada thread possui um registro de pilha de execução próprio, que contém info
 
 Segue em anexo um código realizado em Python mostrando como é uma thread em execução 
 ```python
-import threading
 import time
 
 def minha_funcao():
-    # código da thread
-    print("Iniciando a thread...")
-    time.sleep(10)  # faz a thread esperar por 10 segundos
-    print("Finalizando a thread...")
+    # código da função
+    print("Iniciando a função...")
+    time.sleep(5) # faz a função esperar por 5 segundos
+    print("Finalizando a função...")
 
-# cria uma nova thread
-thread = threading.Thread(target=minha_funcao)
+# chamada da função
+minha_funcao()
 
-# inicia a thread
-thread.start()
-
-# espera até que a thread termine antes de continuar com o código principal
-thread.join()
-
-# o programa agora pode continuar com outras tarefas
-print("A thread foi finalizada.") 
+# o programa continua com outras tarefas
+print("A função foi finalizada.") 
 ```
 Para analisarmos melhor o processo dessa thread, podemos usar o utilitário "htop" no linux, para exibir as informações sobre os processos em execução do sistema de uma forma mais interativa e visual 
 <div align="center">

@@ -4,7 +4,7 @@
 
 Android é um sistema operacional _**open source**_ feito para dispositivos de baixa potência, que funcionam por meio de bateria e estão cheios de hardware. Assim como todos os sistemas operacionais, o Android permite que os aplicativos utilizem os recursos de hardware por meio da abstração e fornece um ambiente definido para os aplicativos. [Brahler 2010].
 
-No sistema operacional Android, as aplicações são criadas em Java utilizando o Android SDK, que é um conjunto completo de ferramentas para desenvolvimento de software. Essas aplicações são executadas em uma máquina virtual Dalvik, que é responsável por interpretar o bytecode do aplicativo e executá-lo no dispositivo [Brahler 2010]. <br>
+No sistema operacional Android, as aplicações são criadas em Java utilizando o Android SDK, que é um conjunto completo de ferramentas para desenvolvimento de software.[Brahler 2010] <br>
 
 Atualmente, 69,74% dos smartphones estão usando o Android como sistema operacional, sendo assim, a plataforma que mais atrai indivíduos para a criação de aplicações. <br>
 

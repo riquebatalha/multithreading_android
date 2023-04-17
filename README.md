@@ -1,4 +1,4 @@
-<h1 align="center"> Singlethread e multithreading em Android  </h1> 
+<h1 align="center"> Single thread e multithreading em Android  </h1> 
 
 ## Introdução ao Android
 

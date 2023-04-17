@@ -105,7 +105,7 @@ Neste caso, podemos perceber como o multithread funciona, sendo executado mais d
 </div> <br>
 
 ## Multithread em Android
-A partir de uma perspectiva de aplicação, existem três tipos de threads: threads de UI, threads de Binder e threads de background, embora todas as threads de aplicação sejam baseadas nos pthreads nativos do Linux e tenham uma representação de Thread em Java, a plataforma atribui propriedades especiais a elas que as distinguem umas das outras.[Göransson 2014]
+A partir de uma perspectiva de aplicação, existem diversos tipos de threads, algumas delas são: threads de UI, threads de Binder e threads de background, embora todas as threads de aplicação sejam baseadas nos pthreads nativos do Linux e tenham uma representação de Thread em Java, a plataforma atribui propriedades especiais a elas que as distinguem umas das outras.[Göransson 2014]
 
 >### UI Thread
 A UI thread (também conhecida como thread da interface do usuário) em um aplicativo Android é a thread principal responsável por lidar com a interface do usuário e a interação do usuário com o aplicativo. Essa thread é responsável por executar todas as operações da interface do usuário, como atualizações de tela, eventos de toque e interações de entrada.[Göransson 2014] <br>

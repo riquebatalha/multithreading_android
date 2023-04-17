@@ -1,20 +1,13 @@
-import threading
 import time
 
 def minha_funcao():
-    # código da thread
-    print("Iniciando a thread...")
-    time.sleep(10)  # faz a thread esperar por 10 segundos
-    print("Finalizando a thread...")
+    # código da função
+    print("Iniciando a função...")
+    time.sleep(5) # faz a função esperar por 5 segundos
+    print("Finalizando a função...")
 
-# cria uma nova thread
-thread = threading.Thread(target=minha_funcao)
+# chamada da função
+minha_funcao()
 
-# inicia a thread
-thread.start()
-
-# espera até que a thread termine antes de continuar com o código principal
-thread.join()
-
-# o programa agora pode continuar com outras tarefas
-print("A thread foi finalizada.")
+# o programa continua com outras tarefas
+print("A função foi finalizada.")

